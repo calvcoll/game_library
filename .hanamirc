@@ -1,0 +1,4 @@
+project=game_library
+architecture=container
+test=minitest
+template=erb
