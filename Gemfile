@@ -7,6 +7,12 @@ gem 'hanami-model', '~> 0.7'
 
 gem 'pg'
 
+# Adding SCSS support
+gem 'sass'
+
+# Adding auth helper\
+gem 'warden'
+
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/applications/code-reloading
