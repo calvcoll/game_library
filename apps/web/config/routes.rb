@@ -3,6 +3,6 @@
 #
 # Example:
 # get '/hello', to: ->(env) { [200, {}, ['Hello from Hanami!']] }
-get '/', to: 'home#index'
+root to: 'home#index'
 get '/login', to: 'session#login', as: :login
 get '/signup', to: 'session#signup', as: :signup

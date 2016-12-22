@@ -3,6 +3,7 @@ module Web::Controllers::Session
     include Web::Action
 
     def call(params)
+      # session[:user] = nil
     end
   end
 end

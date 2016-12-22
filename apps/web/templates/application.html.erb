@@ -7,6 +7,24 @@
     <%= favicon %>
   </head>
   <body>
-    <%= yield %>
+    <div class="dev_message">
+      <%= if ENV['HANAMI_ENV']
+        session.each do |k,v| "<p>#{k}:#{v}</p>" end
+      end%>
+      <p style="margin: 0;"><b> Remove me in the release version! </b></p>
+    </div>
+    <div class="header">
+      <a href="<%= routes.root_path %>">
+        <img class="homepage_icon" src="/assets/logo.png" alt="Homepage icon"/>
+      </a>
+      <div class="menu">
+        <a href="">Games</a>
+        <a href="">Users</a>
+        <a href="<%= routes.login_path %>">Login</a>
+      </div>
+    </div>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
