@@ -10,8 +10,8 @@ h2, h3 { margin: -20px; line-height: 100px; }
 h2 { font-size: 30px; }
 h3 { font-size: 20px; line-height: 22px; color: #666; }
 hr { margin: 2em; color: #ecf0f1; }
-ul { text-align: center; }
-li { display: inline; margin: 2em; line-height: 24px; list-style-type: none; vertical-align: text-top;}
+ul { text-align: left; }
+li { margin: 1em; line-height: 24px; vertical-align: text-top;}
 p { margin-top: 60px; }
 a { color: #333; padding: 1px; }
 code { padding: .2em; background-color: #ecf0f1 }
@@ -51,5 +51,36 @@ code { padding: .2em; background-color: #ecf0f1 }
   align-items:center;
 }
 .container { margin: 1em; }
-
 .dev_message { display: block; }
+button.logout {
+  text-decoration: underline;
+  cursor: pointer;
+  height: 50%;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+              Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  margin-right: 1em;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #aaa;
+  background-color: #ccc;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  color: #333;
+  padding: 1px;
+}
+
+button.logout:focus {
+  outline: none;
+}
+button.logout:active {
+  color:red;
+}
+
+.error_message {
+  color: red;
+  font-weight: bold;
+}

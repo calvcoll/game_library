@@ -3,7 +3,9 @@
   <head>
     <title>Web</title>
     <%= stylesheet 'default' %>
+    <%= javascript 'jquery' %>
     <%= javascript 'turbolinks' %>
+    <%= javascript 'default' %>
     <%= favicon %>
   </head>
   <body>
@@ -18,9 +20,20 @@
         <img class="homepage_icon" src="/assets/logo.png" alt="Homepage icon"/>
       </a>
       <div class="menu">
+        <%= if session["username"]
+            "<a class=\"profile_link\" href=\"#{routes.user_path}#{session["username"]}\">#{session["username"]}</a>"
+          end
+        %>
         <a href="">Games</a>
-        <a href="">Users</a>
-        <a href="<%= routes.login_path %>">Login</a>
+        <a href="<%= routes.user_path %>">Users</a>
+        <%= if session["username"]
+              form_for :user, routes.logout_path do
+                submit 'Logout', class: 'logout'
+              end
+            else
+              "<a href=\"#{routes.login_path}\">Login</a>"
+            end
+        %>
       </div>
     </div>
     <div class="container">
