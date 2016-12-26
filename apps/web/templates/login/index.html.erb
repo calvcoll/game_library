@@ -1,0 +1,24 @@
+<h1>Login</h1>
+<%=
+if flash_errors
+  "<div class=\"error_message\">#{flash_errors}</div>"
+ end
+%>
+<%=
+  unless session[:username]
+    form_for :user, routes.login_create_path do
+      div do
+        label :username
+        text_field :username
+      end
+      div do
+        label :password
+        password_field :password
+      end
+      submit 'Login'
+    end
+  else
+    "You're logged in already!"
+  end
+%>
+<p>Or alternatively, you can <a href="<%= routes.signup_path %>">signup</a>!
