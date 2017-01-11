@@ -1,0 +1,14 @@
+<div class="game_info">
+  <h2><%=game.title%></h2>
+  <p><%=game.info%></p>
+</div>
+<div class="game_comments">
+<h2>Comments</h2>
+<% if comments.count > 0 %>
+  <% comments.each do |comment| %>
+    <%= comment.title %>
+  <% end %>
+<% else %>
+      <p>No Comments Added</p>
+<% end %>
+</div>

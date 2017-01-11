@@ -1,6 +1,8 @@
 require 'hanami/helpers'
 require 'hanami/assets'
 
+require 'sass'
+
 module Web
   class Application < Hanami::Application
     configure do
@@ -143,7 +145,7 @@ module Web
         # See: http://hanamirb.org/guides/assets/compressors
         #
         # In order to skip stylesheet compression comment the following line
-        stylesheet_compressor :builtin
+        stylesheet_compressor :sass
 
         # Specify sources for assets
         #

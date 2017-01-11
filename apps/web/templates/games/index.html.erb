@@ -1,0 +1,12 @@
+<h1>Games</h1>
+<a href="<%= routes.new_game_path %>">New Game</a>
+<% if games.any? %>
+  <div class="games">
+  <% games.each do |game| %>
+    <a href="<%= routes.game_path %>/<%= game.id %>"><%= game.title %> :</a>
+    <p><%= game.info %></p>
+  <% end %>
+  </div>
+<% else %>
+  <p>No Games Added</p>
+<% end %>

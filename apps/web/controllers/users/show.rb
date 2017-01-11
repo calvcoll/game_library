@@ -3,11 +3,13 @@ module Web::Controllers::Users
     include Web::Action
 
     expose :user
+    expose :games
 
     def call(params)
-      repo = UserRepository.new
-      @user = repo.find_user_by_name(params[:id])
-      # @games = GameRepository.find_games_by_user(user)
+      user_repo = UserRepository.new
+      @user = user_repo.find_user_by_name(params[:id])
+      game_repo = GameRepository.new
+      @games = game_repo.find_games_by_user(user)
     end
   end
 end
