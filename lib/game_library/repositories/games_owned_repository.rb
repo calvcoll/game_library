@@ -5,4 +5,10 @@ class GamesOwnedRepository < Hanami::Repository
       .where(user_id: user.id)
   end
 
+  def find_game_owned_by_user(user_id, game_id)
+    games_owneds
+      .where(user_id: user_id, game_id: game_id)
+      .one
+  end
+
 end

@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="dev_message">
-      <%= if ENV['HANAMI_ENV']
+      <%= if ENV['HANAMI_ENV'] == "development"
         session.each do |k,v| "<p>#{k}:#{v}</p>" end
       end%>
       <p style="margin: 0;"><b> Remove me in the release version! </b></p>

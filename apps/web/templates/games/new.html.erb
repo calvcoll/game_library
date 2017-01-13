@@ -1,0 +1,17 @@
+<%=
+if flash_errors
+  "<div class=\"error_message\">#{flash_errors}</div>"
+end
+%>
+<%= form_for :game, routes.game_create_path do
+  div do
+    label :title
+    text_field :title
+  end
+  div do
+    label :info
+    br do end
+    text_area :info, cols: "60", rows: "10"
+  end
+  submit 'Create!'
+end %>

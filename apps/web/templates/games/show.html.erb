@@ -1,14 +1,46 @@
 <div class="game_info">
   <h2><%=game.title%></h2>
+  <%=
+    has_game = GamesOwnedRepository.new.find_game_owned_by_user(user.id,game.id)
+    unless (has_game)
+      form_for :games_owned, routes.new_game_owned_path do
+        hidden_field :game_id, value: game.id
+        submit 'Add to library!', class: 'game_add_to_user'
+      end
+    end
+  %>
   <p><%=game.info%></p>
 </div>
 <div class="game_comments">
 <h2>Comments</h2>
 <% if comments.count > 0 %>
   <% comments.each do |comment| %>
-    <%= comment.title %>
+    <div class="comment">
+      <div class="comment_author">
+        <b><%= user_repo.find(comment.user_id).username %>:</b>
+      </div>
+      <div class="comment_body">
+        <%= comment.comment %>
+      </div>
+    </div>
   <% end %>
 <% else %>
       <p>No Comments Added</p>
 <% end %>
+<div class="add_comment">
+  <% if user %>
+  <%= form_for :comment, routes.new_comment_path do
+    div do
+      label :comment
+    end
+    div do
+      text_area :comment, cols: "60", rows: "10", class: 'comment_textarea'
+    end
+    hidden_field :game_id, value: game.id
+    submit 'Add comment!', class: 'comment_submit'
+  end %>
+  <% else %>
+    <p> Login to create a comment! </p>
+  <%end%>
+</div>
 </div>
