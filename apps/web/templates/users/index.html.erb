@@ -1,14 +1,12 @@
-<%=
-  unless users.nil?
-    "<ul>"
-  end
-%>
-<%=
-string = ""
-users.each do |user|
-  string += "<li><a href=#{routes.user_path}#{user.username}>#{user.username}</a></li>"
-end
-unless users.nil?
-  string += "</ul>"
-end
-%>
+<% unless users.nil? %>
+  <div class="users">
+    <ul>
+  <% users.each do |user| %>
+      <div class="user">
+        <li><a href="<%=routes.user_path + user.username%>"><%= user.username %></a></li>
+      </div>
+  <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= render partial: 'shared/sidebar' %>

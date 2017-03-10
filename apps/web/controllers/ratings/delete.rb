@@ -1,16 +1,16 @@
-module Web::Controllers::GamesOwned
-  class Create
+module Web::Controllers::Ratings
+  class Delete
     include Web::Action
 
     params do
-      required(:games_owned).schema do
+      required(:rating).schema do
         required(:game_id).filled(:int?)
       end
     end
 
     def call(params)
       if params.valid?
-        game_id = params[:games_owned][:game_id]
+        game_id = params[:rating][:game_id]
         user = UserRepository.new.find_user_by_name(session[:username])
         last_game = GameRepository.new.last.id
         uid = nil
@@ -18,18 +18,15 @@ module Web::Controllers::GamesOwned
           uid = user.id
         end
         if (game_id <= last_game && uid)
-          repo = GamesOwnedRepository.new
-          unless (repo.find_game_owned_by_user(uid, game_id))
-            repo.create(game_id: game_id, user_id: uid)
-            flash[:errors] = nil
-          else
-            flash[:errors] = "Already added"
-          end
+          repo = RatingRepository.new
+          rating = repo.find_user_rating_for_game(uid, game_id)
+          repo.delete(rating.id)
+          flash[:errors] = nil
         else
           flash[:errors] = 'Not a valid game identifier'
         end
       else
-        flash[:errors] = "Did you add a game identifier?"
+        flash[:errors] = "Did you add a rating identifier?"
       end
         redirect_to(request.referrer)
     end

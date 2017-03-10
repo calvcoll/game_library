@@ -1,3 +1,4 @@
+require 'bcrypt'
 module Web::Controllers::Login
   class Login
     include Web::Action
@@ -20,7 +21,7 @@ module Web::Controllers::Login
           password = params[:user][:password]
           repo = UserRepository.new
           @user = repo.find_user_by_name(username)
-          unless user.nil? or (password != user.password)
+          unless user.nil? or (BCrypt::Password.new(@user.password) != password)
             session[:username] = username
           else
             self.status = 401

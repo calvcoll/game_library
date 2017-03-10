@@ -9,15 +9,15 @@
     <%= favicon %>
   </head>
   <body>
+    <% if ENV['HANAMI_ENV'] == "development" %>
     <div class="dev_message">
-      <%= if ENV['HANAMI_ENV'] == "development"
-        session.each do |k,v| "<p>#{k}:#{v}</p>" end
-      end%>
+      <%=session.each do |k,v| "<p>#{k}:#{v}</p>" end%>
       <p style="margin: 0;"><b> Remove me in the release version! </b></p>
     </div>
+    <% end %>
     <div class="header">
       <a href="<%= routes.root_path %>">
-        <img class="homepage_icon" src="/assets/logo.png" alt="Homepage icon"/>
+        <%= image 'logo.png', alt:"Homepage icon", id: 'homepage_icon' %>
       </a>
       <div class="menu">
         <%= if session["username"]

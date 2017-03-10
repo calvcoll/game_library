@@ -53,6 +53,52 @@ a { color: $link_color; padding: 1px; }
   align-items:center;
   text-decoration: none;
 }
+
+.container { margin: 1em; position: relative;}
+.dev_message { display: block; }
+
+.error_message {
+  color: red;
+  font-weight: bold;
+}
+
+.game_info {
+  display: inline-block;
+  width: 300px;
+  height: 100%;
+  float: left;
+  padding-right: 1em;
+  border-right: 1px solid $separator_color;
+}
+
+.game_info > h1, .game_info > h2,
+.game_comments > h1, .game_comments > h2 {
+  line-height: normal;
+}
+
+.game_comments {
+  display: inline-block;
+  height: 100%;
+  float: left;
+  margin-left: 1em;
+}
+
+.game_comments > .add_comment {
+  margin-top: 4em;
+}
+
+.comment_textarea {
+  background-color:$header_color;
+  color: $font_color;
+}
+
+button[type=submit] {
+  background-color: $header_color;
+  color: $font_color;
+  border-color: $header_color;
+  border-style: solid;
+}
+
 button.logout {
   cursor: pointer;
   height: 50%;
@@ -81,42 +127,31 @@ button.logout:active {
   color:red;
 }
 
-.container { margin: 1em; }
-.dev_message { display: block; }
-
-.error_message {
-  color: red;
-  font-weight: bold;
+.games, .users {
+  width: 70%;
 }
 
-.game_info {
+.new_game {
+  margin: 1em;
+}
+
+.sidebar {
+  // width: 200px;
+  width: 30%;
+  height:100%;
+  right: 0px;
+  top: 0px;
+  position: absolute;
+}
+
+.sidebar > img {
+  max-width: 100%;
+}
+
+#games_owned-form, #rating-form, #added_text, #rating_text {
   display: inline-block;
-  width: 300px;
-  height: 100%;
-  float: left;
-  padding-right: 1em;
-  border-right: 1px solid $separator_color;
 }
 
-.game_comments {
-  display: inline-block;
-  height: 100%;
-  float: left;
-  margin-left: 1em;
-}
-
-.game_comments > .add_comment {
-  margin-top: 4em;
-}
-
-.comment_textarea {
-  background-color:$header_color;
-  color: $font_color;
-}
-
-.comment_submit, .game_add_to_user {
-  background-color: $header_color;
-  color: $font_color;
-  border-color: $header_color;
-  border-style: solid;
+#added_text, #rating_text {
+   font-size:14px;
 }

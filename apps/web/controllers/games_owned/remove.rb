@@ -1,5 +1,5 @@
 module Web::Controllers::GamesOwned
-  class Create
+  class Remove
     include Web::Action
 
     params do
@@ -19,12 +19,9 @@ module Web::Controllers::GamesOwned
         end
         if (game_id <= last_game && uid)
           repo = GamesOwnedRepository.new
-          unless (repo.find_game_owned_by_user(uid, game_id))
-            repo.create(game_id: game_id, user_id: uid)
-            flash[:errors] = nil
-          else
-            flash[:errors] = "Already added"
-          end
+          game = repo.find_game_owned_by_user(uid, game_id)
+          repo.delete(game.id)
+          flash[:errors] = nil
         else
           flash[:errors] = 'Not a valid game identifier'
         end

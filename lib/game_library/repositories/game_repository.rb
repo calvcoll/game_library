@@ -16,7 +16,7 @@ class GameRepository < Hanami::Repository
     returned = []
     owned.each do |game_owned|
       game = games
-        .where(id: game_owned.id)
+        .where(id: game_owned.game_id)
         .one
       returned.push(game)
     end

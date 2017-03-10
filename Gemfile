@@ -10,8 +10,11 @@ gem 'pg'
 # Adding SCSS support
 gem 'sass'
 
+# Adding BCrypt passwords
+gem 'bcrypt'
+
 # Adding auth helper\
-gem 'warden'
+#gem 'warden'
 
 group :development do
   # Code reloading
@@ -29,5 +32,5 @@ group :test do
 end
 
 group :production do
-  # gem 'puma'
+  gem 'puma'
 end

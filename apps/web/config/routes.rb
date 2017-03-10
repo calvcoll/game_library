@@ -3,7 +3,9 @@
 #
 # Example:
 # get '/hello', to: ->(env) { [200, {}, ['Hello from Hanami!']] }
-post '/games_owned', to: 'games_owned#create'
+post '/ratings/remove', to: 'ratings#delete', as: :remove_rating
+post '/ratings', to: 'ratings#create', as: :new_rating
+post '/gamesowned/remove', to: 'games_owned#remove', as: :remove_game_owned
 post '/gamesowned', to: 'games_owned#create', as: :new_game_owned
 
 post '/comments', to: 'comments#create'

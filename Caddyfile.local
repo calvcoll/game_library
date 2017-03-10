@@ -1,0 +1,8 @@
+localhost:2020 { #as well as calvincollins.co.uk on prod
+  proxy / localhost:2300 {
+    # transparent
+    policy round_robin
+    health_check /
+  }
+  gzip
+}

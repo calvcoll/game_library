@@ -46,7 +46,7 @@ module Web
       # URI host used by the routing system to generate absolute URLs
       # Defaults to "localhost"
       #
-      # host 'example.org'
+      host 'calvincollins.co.uk'
 
       # URI port used by the routing system to generate absolute URLs
       # Argument: An object coercible to integer, default to 80 if the scheme is http and 443 if it's https
@@ -232,15 +232,15 @@ module Web
         frame-ancestors 'self';
         base-uri 'self';
         default-src 'none';
-        script-src 'self' 'unsafe-inline';
+        script-src 'self' 'unsafe-inline' https://d2y2b73huusi9c.cloudfront.net;
         connect-src 'self';
         img-src 'self' https: data:;
-        style-src 'self' 'unsafe-inline' https:;
+        style-src 'self' 'unsafe-inline' https://d2y2b73huusi9c.cloudfront.net https:;
         font-src 'self';
         object-src 'none';
         plugin-types application/pdf;
-        child-src 'self';
-        frame-src 'self';
+        child-src 'self' https://*.play-asia.com;
+        frame-src 'self' https://*.play-asia.com;
         media-src 'self'
       }
 
@@ -336,9 +336,9 @@ module Web
         #
         # See: http://hanamirb.org/guides/assets/content-delivery-network
         #
-        # scheme 'https'
-        # host   'cdn.example.org'
-        # port   443
+        scheme 'https'
+        host   'd2y2b73huusi9c.cloudfront.net'
+        port   443
 
         # Subresource Integrity
         #

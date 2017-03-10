@@ -1,46 +1,78 @@
 <div class="game_info">
   <h2><%=game.title%></h2>
-  <%=
-    has_game = GamesOwnedRepository.new.find_game_owned_by_user(user.id,game.id)
-    unless (has_game)
-      form_for :games_owned, routes.new_game_owned_path do
+  <% game_rating = RatingRepository.new.get_avg_for_game(game)
+    unless game_rating %>
+      <h3>No ratings yet!</h3>
+    <% else
+        if (game_rating % 1 == 0)
+          game_rating = game_rating.round
+        end %>
+      <h3><%= "#{game_rating}/5 stars!" %></h3>
+    <% end %>
+  <% if user %>
+  <% has_game = GamesOwnedRepository.new.find_game_owned_by_user(user.id,game.id)
+    unless (has_game)%>
+      <%=form_for :games_owned, routes.new_game_owned_path do
         hidden_field :game_id, value: game.id
         submit 'Add to library!', class: 'game_add_to_user'
-      end
-    end
-  %>
+      end %>
+    <% else %>
+      <p id="added_text"><i> You've added this! </i> </p>
+      <%= form_for :games_owned, routes.remove_game_owned_path do
+        hidden_field :game_id, value: game.id
+        submit 'Remove?', class: 'game_add_to_user'
+      end %>
+    <% end %>
+    <br>
+    <% rating = RatingRepository.new.find_user_rating_for_game(user.id,game.id) %>
+    <% unless rating
+        rating_range = Hash[1=>1,2=>2,3=>3,4=>4,5=>5] %>
+    <%= form_for :rating, routes.new_rating_path do
+          hidden_field :game_id, value: game.id
+          select :rating, rating_range
+          submit 'Rate!', class: 'add_rating'
+        end %>
+    <% else %>
+      <p id="rating_text"><i><%= "Your Rating: #{rating.rating}" %></i></p>
+      <%= form_for :rating, routes.remove_rating_path do
+            hidden_field :game_id, value: game.id
+            submit 'Remove Rating?', class: 'add_rating'
+      end %>
+    <% end %>
+    <br>
+  <% end %>
   <p><%=game.info%></p>
 </div>
 <div class="game_comments">
 <h2>Comments</h2>
-<% if comments.count > 0 %>
-  <% comments.each do |comment| %>
-    <div class="comment">
-      <div class="comment_author">
-        <b><%= user_repo.find(comment.user_id).username %>:</b>
+  <% if comments.count > 0 %>
+    <% comments.each do |comment| %>
+      <div class="comment">
+        <div class="comment_author">
+          <b><%= user_repo.find(comment.user_id).username %>:</b>
+        </div>
+        <div class="comment_body">
+          <%= comment.comment %>
+        </div>
       </div>
-      <div class="comment_body">
-        <%= comment.comment %>
-      </div>
-    </div>
-  <% end %>
-<% else %>
-      <p>No Comments Added</p>
-<% end %>
-<div class="add_comment">
-  <% if user %>
-  <%= form_for :comment, routes.new_comment_path do
-    div do
-      label :comment
-    end
-    div do
-      text_area :comment, cols: "60", rows: "10", class: 'comment_textarea'
-    end
-    hidden_field :game_id, value: game.id
-    submit 'Add comment!', class: 'comment_submit'
-  end %>
+    <% end %>
   <% else %>
-    <p> Login to create a comment! </p>
-  <%end%>
-</div>
+        <p>No Comments Added</p>
+  <% end %>
+  <div class="add_comment">
+    <% if user %>
+    <%= form_for :comment, routes.new_comment_path do
+      div do
+        label :comment
+      end
+      div do
+        text_area :comment, cols: "60", rows: "10", class: 'comment_textarea'
+      end
+      hidden_field :game_id, value: game.id
+      submit 'Add comment!', class: 'comment_submit'
+    end %>
+    <% else %>
+      <p> Login to create a comment! </p>
+    <%end%>
+  </div>
 </div>
