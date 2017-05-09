@@ -14,7 +14,6 @@ class RatingRepository < Hanami::Repository
         sum += rating.rating
       end
       (sum / scores.length).round 1
-      sum
     else
       nil
     end
